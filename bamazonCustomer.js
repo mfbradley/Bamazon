@@ -80,8 +80,8 @@ function quantityOrdered(value) {
                 console.log("");
                 var stockLevel = res[i].stock_quantity;
                 var price = res[i].price;
-                console.log(res[i].product_name + " | " + stockLevel);
-                console.log("-----------------------------------");
+                // console.log(res[i].product_name + " | " + stockLevel);
+                // console.log("-----------------------------------");
             }
 
             if (stockLevel - number.quantity > 0) {
@@ -89,32 +89,44 @@ function quantityOrdered(value) {
                 var totalCost = (number.quantity * price);
                 console.log("");
                 console.log("Total: $" + totalCost);
+
+                stockLevelUpdate();
+                showItemsAvailable();
             }
 
             else if (stockLevel - number.quantity === 0) {
                 console.log("Just enough! Thank you for choosing Bamazon! Your order has been placed.");
-                console.log(stockLevel - number.quantity);
+                // console.log(stockLevel - number.quantity);
+                totalCost = (number.quantity * price);
+                console.log("");
+                console.log("Total: $" + totalCost);
+
+                stockLevelUpdate();
+                showItemsAvailable();
             }
 
             else if (stockLevel - number.quantity < 0) {
                 console.log("Insufficient quantity. Please try again.");
+                console.log("");
+                showItemsAvailable();
+
             }
 
-            // showItemsAvailable();
 
             function stockLevelUpdate() {
                 var newStockLevel = stockLevel - number.quantity;
-                console.log(stockLevel);
-                console.log(newStockLevel);
+                // console.log(stockLevel);
+                // console.log(newStockLevel);
 
                 var query = "UPDATE products SET stock_quantity=? WHERE item_id=?";
 
                 connection.query(query, [newStockLevel, value], function(err, res) {
                     if (err) throw err;
-                    console.log(value);
+                    // console.log(value);
                 });
             }
-            stockLevelUpdate();
+
+
         });
 
     });
