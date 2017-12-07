@@ -30,15 +30,14 @@ function showItemsAvailable() {
             console.log("Item ID: " + res[i].item_id + " || Product: " + res[i].product_name + " || Department: " + res[i].department_name + " || Price: $" + res[i].price);
         }
     });
+
+    // set timeout for itemANdQuantityMessage
+    setTimeout(function() {
+        console.log("");
+        itemOrdered();
+    }, 1000);
+
 }
-
-
-// set timeout for itemANdQuantityMessage
-setTimeout(function() {
-    console.log("");
-    itemOrdered();
-}, 1000);
-
 
 function itemOrdered() {
     inquirer.prompt([{
@@ -53,12 +52,14 @@ function itemOrdered() {
 
             for (var i = 0; i < res.length; i++) {
                 console.log("");
-                console.log(res[i].product_name + " | " + res[i].department_name + " | " + res[i].price);
+                console.log(res[i].product_name + " | " + res[i].department_name + " | $" + res[i].price);
                 console.log("-----------------------------------");
             }
+            quantityOrdered(answer.item);
         });
 
-        quantityOrdered(answer.item);
+
+
 
     });
 
@@ -93,15 +94,30 @@ function quantityOrdered(value) {
             else if (stockLevel - number.quantity === 0) {
                 console.log("Just enough! Thank you for choosing Bamazon! Your order has been placed.");
                 console.log(stockLevel - number.quantity);
-
             }
 
             else if (stockLevel - number.quantity < 0) {
                 console.log("Insufficient quantity. Please try again.");
-
             }
 
-            showItemsAvailable();
+            // showItemsAvailable();
+
+            function stockLevelUpdate() {
+                var newStockLevel = stockLevel - number.quantity;
+                console.log(stockLevel);
+                console.log(newStockLevel);
+
+                var query = "UPDATE products SET stock_quantity=? WHERE item_id=?";
+
+                connection.query(query, [newStockLevel, value], function(err, res) {
+                    if (err) throw err;
+                    console.log(value);
+                });
+            }
+            stockLevelUpdate();
         });
+
     });
+
+
 }
