@@ -27,7 +27,7 @@ function showItemsAvailable() {
         console.log("");
 
         for (var i = 0; i < res.length; i++) {
-            console.log("Item ID: " + res[i].item_id + " || Product: " + res[i].product_name + " || Department: " + res[i].department_name + " || Price: $" + res[i].price);
+            console.log("Item ID: " + res[i].item_id + " | Product: " + res[i].product_name + " | Department: " + res[i].department_name + " | Price: $" + res[i].price);
         }
     });
 
@@ -97,7 +97,7 @@ function quantityOrdered(value) {
             else if (stockLevel - number.quantity === 0) {
                 console.log("Just enough! Thank you for choosing Bamazon! Your order has been placed.");
                 // console.log(stockLevel - number.quantity);
-                totalCost = (number.quantity * price);
+                var totalCost = (number.quantity * price);
                 console.log("");
                 console.log("Total: $" + totalCost);
 

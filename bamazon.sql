@@ -44,3 +44,4 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Percolator", "Camping", 30.00, 40);
 
 SELECT * FROM products;
+
