@@ -1,12 +1,12 @@
 # Bamazon
 
-Image:
+Successful Customer Purchase:
 ![SuccessfulCustomerPurchase](images/BamazonCustomerPurchase.PNG)
 
-Image:
+Unsuccessful Customer Purchase due to Insufficient Quantities:
 ![UnuccessfulCustomerPurchase](images/BamazonCustomerPurchase_InsufficientQuantity.PNG)
 
-Image:
+Barely Successful Customer Purchase - customer depleted stock levels:
 ![BarelySuccessfulCustomerPurchase](images/BamazonCustomerPurchase_JustEnough.PNG)
 
 
