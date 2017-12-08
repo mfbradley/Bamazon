@@ -1,13 +1,13 @@
 # Bamazon
 
 Image:
-![Successful Customer Purchase](images/Bamazon Customer Purchase.PNG)
+![SuccessfulCustomerPurchase](images/BamazonCustomerPurchase.PNG)
 
 Image:
-![Unuccessful Customer Purchase](images/Bamazon Customer Purchase - Insufficient Quantity.PNG)
+![UnuccessfulCustomerPurchase](images/BamazonCustomerPurchase_InsufficientQuantity.PNG)
 
 Image:
-![Barely successful Customer Purchase](images/Bamazon Customer Purchase - Just Enough!.PNG)
+![BarelySuccessfulCustomerPurchase](images/BamazonCustomerPurchase_JustEnough.PNG)
 
 
 
