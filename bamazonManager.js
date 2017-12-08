@@ -96,31 +96,31 @@ function addToInventory() {
 
             for (var i = 0; i < res.length; i++) {
                 console.log(res[i].item_id + " " + res[i].product_name + " | " + res[i].department_name + " | $" + res[i].price + " | Quantity: " + res[i].stock_quantity);
+                var quantity = res[i].stock_quantity;
 
             }
         });
 
-        updateQuantity(itemToAddTo);
+        function updateQuantity() {
+            var newQuantity = quantity +
+                inquirer.prompt([{
+                    name: "itemQuantity",
+                    type: "input",
+                    message: "How many units would you like to add?"
+
+                }]).then(function(quantityUpdate) {
+                    var query = "UPDATE products SET stock_quantity=? WHERE item_id=?";
+                    connection.query(query, [quantityUpdate.itemQuantity, itemToAddTo.item], function(err, res) {
+                        if (err) throw err;
+
+                        for (var i = 0; i < res.length; i++) {
+                            console.log("");
+                            console.log(res[i].product_name + " | Quantity: " + res[i].stock_quantity);
+                        }
+                    });
+                });
+        }
 
     });
 
-}
-
-function updateQuantity(value) {
-    inquirer.prompt([{
-        name: "itemQuantity",
-        type: "input",
-        message: "How many units would you like to add?"
-
-    }]).then(function(quantityUpdate) {
-        var query = "UPDATE products SET stock_quantity=? WHERE item_id=?";
-        connection.query(query, [quantityUpdate.itemQuantity, value.item], function(err, res) {
-            if (err) throw err;
-
-            for (var i = 0; i < res.length; i++) {
-                console.log("");
-                console.log(res[i].product_name + " | Quantity: " + res[i].stock_quantity);
-            }
-        });
-    });
 }

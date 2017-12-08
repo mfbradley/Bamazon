@@ -119,6 +119,7 @@ function quantityOrdered(value) {
             else if (stockLevel - number.quantity === 0) {
                 console.log("Just enough! Thank you for choosing Bamazon! Your order has been placed.");
                 // console.log(stockLevel - number.quantity);
+                totalCost = (number.quantity * price);
                 console.log("");
                 console.log("Total: $" + totalCost);
 
