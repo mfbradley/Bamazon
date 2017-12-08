@@ -1,24 +1,30 @@
+// declare and require mysql and inquirer packages
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+//create connection to bamazondb
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
 
-    // Your username
+    // username
     user: "root",
 
-    // Your password
+    // password
     password: "",
     database: "bamazonDB"
 });
 
+// call showMenuOptions upon connecting
 connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
     showMenuOptions();
 });
 
+// show menu options function
+// show manager 4 options: view products for sale, view low inventory, add to inventory, add new product
+// run function specific to each option depending on which option the manager picks (using if/else statements)
 function showMenuOptions() {
     inquirer.prompt([{
         name: "menuChoice",
@@ -28,18 +34,7 @@ function showMenuOptions() {
 
     }]).then(function(answer) {
         if (answer.menuChoice === "View_Products") {
-            console.log("");
-            console.log("Available Products: ");
-            console.log("-----------------------------------");
-
-            var query = "SELECT * FROM products";
-            connection.query(query, function(err, res) {
-                if (err) throw err;
-
-                for (var i = 0; i < res.length; i++) {
-                    console.log(res[i].item_id + " " + res[i].product_name + " | " + res[i].department_name + " | $" + res[i].price + " | Quantity: " + res[i].stock_quantity);
-                }
-            });
+            viewProducts();
         }
 
         else if (answer.menuChoice === "View_Low_Inventory") {
@@ -51,6 +46,23 @@ function showMenuOptions() {
         }
     });
 }
+
+
+function viewProducts() {
+    console.log("");
+    console.log("Available Products: ");
+    console.log("-----------------------------------");
+
+    var query = "SELECT * FROM products";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " " + res[i].product_name + " | " + res[i].department_name + " | $" + res[i].price + " | Quantity: " + res[i].stock_quantity);
+        }
+    });
+}
+
 
 function showLowInventory() {
     console.log("");

@@ -15,6 +15,7 @@ var connection = mysql.createConnection({
     database: "bamazonDB"
 });
 
+// call showItemsAvailable upon connecting
 connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
